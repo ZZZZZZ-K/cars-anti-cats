@@ -1,4 +1,6 @@
 # cars-anti-cats
+The purpose of this system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.
+
 Developed a system based on Raspberry Pi 4 that detects the presence of a cat near a vehicle using infrared (IR) sensors, and triggers an ultrasonic sound emitter to deter the cat. The system should increase the sound intensity if multiple sensors detect the cat simultaneously.
 Raspberry Pi 4:
 The central control unit that processes inputs from the infrared sensors and controls the ultrasonic emitter.
@@ -10,3 +12,4 @@ Battery supply:
 The system draws power from the vehicle’s 12V battery though a step-down module (DC-DC converter)  to convert the voltage to 5v
 back-up supply
 lithium battery is required if vehicle battery is not supplying.
+

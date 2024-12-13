@@ -1,0 +1,49 @@
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+
+infrared_pins = [17, 18, 19, 20, 21, 22, 23]
+
+ultrasonic_pin = 24
+
+for pin in infrared_pins:
+    GPIO.setup(pin, GPIO.IN)  
+GPIO.setup(ultrasonic_pin, GPIO.OUT)  
+
+def emit_sound(strength):
+    if strength > 0:
+        GPIO.output(ultrasonic_pin, GPIO.HIGH)
+        time.sleep(strength)  
+        GPIO.output(ultrasonic_pin, GPIO.LOW)
+    else:
+        GPIO.output(ultrasonic_pin, GPIO.LOW)
+
+def detect_cat():
+    active_sensors = 0
+    
+    for pin in infrared_pins:
+        if GPIO.input(pin) == GPIO.HIGH:
+            active_sensors += 1 
+    
+    return active_sensors
+
+try:
+    while True:
+        active_sensors = detect_cat()
+        
+        if active_sensors > 0:
+            print(f"检测到猫！感应到{active_sensors}个传感器")
+            
+            sound_strength = 0.1 * active_sensors  
+            emit_sound(sound_strength)  
+        else:
+            print("没有检测到猫")
+            emit_sound(0) 
+        
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("程序中止")
+finally:
+    GPIO.cleanup()  

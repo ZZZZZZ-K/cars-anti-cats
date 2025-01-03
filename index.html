@@ -209,15 +209,6 @@
     </div>
 </header>
 
-<!-- 各部分内容 -->
-<div class="container fade-in" id="intro">
-    <section class="section">
-        <h2>About the Project</h2>
-        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
-        <p style="font-size: 1.2rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
-    </section>
-</div>
-
 <!-- 导航菜单 -->
 <nav id="navigation">
     <a href="#about" onclick="showSection('intro')">About</a>
@@ -226,8 +217,14 @@
     <a href="#impact" onclick="showSection('impact')">Impact</a>
 </nav>
 
-<!-- 小箭头指示符 -->
-<div id="nav-indicator"></div>
+<!-- 各部分内容 -->
+<div class="container fade-in" id="intro">
+    <section class="section">
+        <h2>About the Project</h2>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
+        <p style="font-size: 1.2rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
+    </section>
+</div>
 
 <div class="container fade-in" id="how-it-works">
     <section class="section">
@@ -251,10 +248,21 @@
     </section>
 </div>
 
+<!-- IMPACT 部分 -->
+<div class="container fade-in" id="impact">
+    <section class="section">
+        <h2>Impact</h2>
+        <p>The impact of this project has been significant, both for the community and the stray cats. By installing insulated shelters, we've provided these cats with a safe and warm place to stay during the cold winter months, reducing the risks of injury or harm from cars. The TNR program has been successful in managing the stray population, preventing uncontrolled growth, and improving the overall health and well-being of the cats.</p>
+        <p>Additionally, many of the cats involved in the program have found loving homes through adoption, giving them a chance for a better life. On a larger scale, this project has raised awareness about the issue of stray animals in urban areas and has encouraged more community involvement in animal welfare. The collaboration with local residents, property management, and animal advocates has fostered a sense of shared responsibility and compassion, making the community a safer place for both people and animals.</p>
+    </section>
+</div>
+
+<!-- 页脚 -->
 <footer>
     <p>&copy; 2025 CARS-ANTI-CATS Project | All rights reserved.</p>
 </footer>
 
+<!-- 脚本 -->
 <script>
     // 前置动画播放视频
     function startAnimation() {
@@ -283,6 +291,17 @@
         });
         document.getElementById(id).style.display = 'block';
     }
+
+    // 显示导航栏和箭头指示符
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'none'; // 隐藏箭头
+        } else {
+            document.getElementById('navigation').classList.remove('show');
+            document.getElementById('nav-indicator').style.display = 'block'; // 显示箭头
+        }
+    });
 </script>
 
 </body>

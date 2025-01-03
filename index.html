@@ -118,6 +118,21 @@
             bottom: 20px; /* 显示时在屏幕底部 */
         }
 
+        /* 小箭头指示符 */
+        #nav-indicator {
+            position: fixed;
+            bottom: 60px; /* 箭头指示位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid #FF7043; /* 橘色箭头 */
+            z-index: 19;
+            display: none; /* 初始隐藏 */
+        }
+
         /* 内容容器 */
         .container {
             width: 80%;
@@ -196,6 +211,9 @@
     <a href="#impact" onclick="showSection('impact')">Impact</a>
 </nav>
 
+<!-- 小箭头指示符 -->
+<div id="nav-indicator"></div>
+
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
@@ -220,60 +238,61 @@
 <div class="container fade-in" id="impact">
     <section class="section">
         <h2>Impact and Vision</h2>
-        <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world problems. It reflects the importance of shared concerns driving collective action and showcases how innovation can be used to create sustainable solutions.</p>
+        <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world issues. It demonstrates how small-scale, community-driven initiatives can create a positive change. The solution not only protects cats but also raises awareness about the ethical responsibility to care for stray animals.</p>
     </section>
 </div>
 
 <footer>
-    <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
+    <p>&copy; 2025 CARS-ANTI-CATS | All Rights Reserved</p>
 </footer>
 
 <script>
-    // 前置动画功能
-    let preloadDiv = document.getElementById('preload');
-    let clickText = document.querySelector('.text');
-    let currentImageIndex = 1;
-
+    // 前置动画函数
     function startAnimation() {
-        clickText.style.display = 'none'; // 隐藏点击文字
-        showPathImages(); // 显示路径图片
+        document.getElementById("preload").style.display = 'none';
+        document.getElementById("header").classList.add('fade-in');
+        document.getElementById("intro").style.display = 'block';
+        showNavIndicator(); // 显示导航栏指示器
     }
 
-    function showPathImages() {
-        let pathImages = ['images/images/1.jpg', 'images/images/2.jpg', 'images/images/3.jpg']; // 路径图片
-        if (currentImageIndex < pathImages.length) {
-            preloadDiv.style.backgroundImage = `url(${pathImages[currentImageIndex]})`;
-            currentImageIndex++;
-            setTimeout(showPathImages, 2000);
-        } else {
-            preloadDiv.style.display = 'none'; // 隐藏前置动画区域
-            document.getElementById('header').style.display = 'block'; // 显示标题
-            document.querySelector('#navigation').style.display = 'flex'; // 显示导航栏
-            showSection('intro'); // 显示介绍内容
-        }
+    // 导航显示指示器
+    function showNavIndicator() {
+        setTimeout(function() {
+            document.getElementById("nav-indicator").style.display = 'block';
+        }, 2000); // 延迟显示指示器
     }
 
-    // 导航栏显示和隐藏
-    let nav = document.getElementById('navigation');
-    let navTimeout;
-
-    window.addEventListener('mousemove', (event) => {
-        if (event.clientY > window.innerHeight - 10) {
-            clearTimeout(navTimeout);
-            nav.classList.add('show');
-        } else {
-            navTimeout = setTimeout(() => {
-                nav.classList.remove('show');
-            }, 1000); // 等待一秒后隐藏导航栏
-        }
-    });
-
-    // 显示特定部分内容
+    // 显示相应部分
     function showSection(sectionId) {
-        const sections = document.querySelectorAll('.container');
-        sections.forEach(section => section.style.display = 'none'); // 隐藏所有部分
-        document.getElementById(sectionId).style.display = 'block'; // 显示当前部分
+        document.querySelectorAll('.container').forEach(function(container) {
+            container.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+
+        // 显示导航栏
+        document.getElementById('navigation').classList.add('show');
     }
+
+    // 页面滚动时触发，判断是否显示导航栏
+    window.onscroll = function() {
+        var scrollPosition = window.scrollY + window.innerHeight;
+        var documentHeight = document.documentElement.scrollHeight;
+
+        // 触发条件：滚动到距离底部200px时显示导航栏
+        if (documentHeight - scrollPosition < 200) {
+            document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'none';
+        } else {
+            document.getElementById('navigation').classList.remove('show');
+            document.getElementById('nav-indicator').style.display = 'block';
+        }
+    };
+
+    // 页面加载时触发
+    window.onload = function() {
+        startAnimation();
+    };
 </script>
+
 </body>
 </html>

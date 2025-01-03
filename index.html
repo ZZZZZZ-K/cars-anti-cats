@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,45 +8,22 @@
         /* 统一的像素风格字体 */
         body {
             font-family: 'Courier New', Courier, monospace;
+            background-color: #fff;
+            color: #333;
             margin: 0;
             padding: 0;
             text-align: center;
             overflow-x: hidden;
-            background-color: #f4f4f9;
-            color: #333;
+            background-image: url('images/images/bG.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
-        /* 前置动画 */
-        .preload {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
+        /* 使前置动画视频淡入 */
+        .fade-in {
+            animation: fadeIn 2s ease-in-out forwards;
         }
 
-        .preload img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
-        .preload-text {
-            font-size: 2rem;
-            font-family: 'Courier', monospace;
-            color: #fff;
-            position: absolute;
-            animation: fadeInText 1.5s ease-out;
-        }
-
-        /* 动画效果 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -57,25 +33,6 @@
             }
         }
 
-        @keyframes fadeInText {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* 网站背景 */
-        body {
-            background-image: url('images/images/bG.jpg'); /* 网站背景图 */
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Header */
         header {
             display: flex;
             justify-content: center;
@@ -87,36 +44,44 @@
             z-index: 10;
         }
 
+        header img.logo {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 3rem; /* 放大标题 */
             font-weight: bold;
             text-transform: uppercase;
         }
 
         header p {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 2rem; /* 放大描述文本 */
         }
 
         /* 导航菜单 */
         nav {
             position: fixed;
-            bottom: 10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: #333;
             color: #fff;
             padding: 1rem;
             border-radius: 10px;
-            z-index: 10;
+            z-index: 20;
+            display: none; /* 初始隐藏 */
+            transition: opacity 1s ease-in-out;
         }
 
         nav a {
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 2rem; /* 放大字体 */
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
             transition: transform 0.3s ease-in-out;
@@ -126,7 +91,7 @@
             transform: scale(1.2);
         }
 
-        /* 内容容器 */
+        /* 内容部分 */
         .container {
             width: 80%;
             margin: auto;
@@ -149,44 +114,26 @@
             margin: 0 auto;
         }
 
-        /* 页脚 */
         footer {
             background: #333;
             color: #fff;
             text-align: center;
             padding: 1rem;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            z-index: 10;
-        }
-
-        /* 页面底部最底层 */
-        .footer-bottom {
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-
-        /* 高亮显示 */
-        .highlight {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #FF7043;
-        }
-
     </style>
 </head>
 <body>
 
-<!-- 前置动画 -->
-<div class="preload" id="preload">
-    <img src="images/images/0.jpg" alt="Preload Image" id="preloadImage">
-    <div class="preload-text" id="preloadText">Click to view CAC</div>
-</div>
+<!-- 前置视频 -->
+<video id="intro-video" class="fade-in" autoplay muted>
+    <source src="images/intro-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
-<!-- Header -->
-<header class="fade-in">
+<header id="header" class="fade-in" style="display: none;">
     <div>
         <h1>CARS-ANTI-CATS Project</h1>
         <p>A community-driven solution to protect stray cats and ensure safety</p>
@@ -194,7 +141,7 @@
 </header>
 
 <!-- 导航菜单 -->
-<nav>
+<nav id="navigation">
     <a href="#about" onclick="showSection('intro')">About</a>
     <a href="#how-it-works" onclick="showSection('how-it-works')">How it works</a>
     <a href="#community" onclick="showSection('community')">Community</a>
@@ -220,8 +167,9 @@
 <div class="container fade-in" id="community">
     <section class="section">
         <h2>Community Engagement</h2>
-        <p class="highlight">11 stray cats to 3, 0 cats in garage 2024 winter.</p>
-        <img src="images/images/community.jpg" alt="Community Engagement">
+        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
+        <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations.</p>
+        <p><strong>11 stray cats to 3, 0 cats in garage 2024 winter.</strong></p>
         <p>I reached out to local residents who regularly feed stray cats and shared my project with them. After getting approval from property management, we placed cat shelters in designated areas. Over the past two years, the stray cat population, which previously included cats seeking warmth in the underground parking garage, has been significantly reduced. This winter, no strays have been found in the garage. Through TNR, we controlled the stray population, leaving only three cats still roaming, all of which are now housed in warm shelters. The rest have been adopted.</p>
     </section>
 </div>
@@ -233,41 +181,27 @@
     </section>
 </div>
 
-<!-- 页脚 -->
-<footer class="footer-bottom">
+<footer>
     <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
 </footer>
 
 <script>
-    // 前置动画逐帧显示效果
-    let currentFrame = 0;
-    const totalFrames = 9; // 总帧数
-    const preloadImage = document.getElementById('preloadImage');
-    const preloadText = document.getElementById('preloadText');
-
-    function showFrames() {
-        if (currentFrame < totalFrames) {
-            currentFrame++;
-            preloadImage.src = `images/images/${currentFrame}.jpg`;
-        } else {
-            // 动画完成后隐藏前置动画区域
-            document.getElementById('preload').style.display = 'none';
-        }
-    }
-
-    // 点击开始帧动画
-    preloadText.addEventListener('click', function() {
-        preloadText.style.display = 'none';
-        setInterval(showFrames, 200); // 每100毫秒切换一帧
+    // 前置视频播放完成后显示导航菜单和头部内容
+    const introVideo = document.getElementById('intro-video');
+    introVideo.addEventListener('ended', function() {
+        // 显示导航菜单
+        const navigation = document.getElementById('navigation');
+        const header = document.getElementById('header');
+        navigation.style.display = 'block';  // 显示导航菜单
+        header.style.display = 'block';  // 显示头部内容
     });
 
-    // 默认显示About部分
-    showSection('intro');
-
-    // 页面内容切换函数
     function showSection(sectionId) {
+        // 隐藏所有部分
         const sections = document.querySelectorAll('.container');
         sections.forEach(section => section.style.display = 'none');
+
+        // 显示点击的部分
         const selectedSection = document.getElementById(sectionId);
         selectedSection.style.display = 'block';
     }

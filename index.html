@@ -169,18 +169,6 @@
             color: #FF7043; /* 高亮数字颜色 */
         }
 
-        /* IMPACT 部分 - 新增 */
-        #impact h2 {
-            font-size: 3rem;
-            color: #FF7043;
-        }
-
-        #impact p {
-            font-size: 2.5rem;
-            line-height: 1.6;
-            margin: 1rem 0;
-        }
-
         /* 添加文本框样式 */
         .text-box {
             width: 100%;
@@ -225,8 +213,7 @@
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
-        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
-        <p style="font-size: 1.4rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle..</p>
     </section>
 </div>
 
@@ -256,49 +243,72 @@
     </section>
     <section>
         <h2>Community Engagement</h2>
-        <img src="images/images/c1e3e584988ae4dcce6ef52d03010442.jpg" alt="community image">
-        <p>By promoting this project within the local community, we have seen a strong positive response, with over 300 people now participating in the TNR initiative, as well as community workshops focused on understanding the importance of keeping strays safe.</p>
-    </section>
-</div>
-
-<!-- IMPACT 部分 -->
-<div class="container fade-in" id="impact">
-    <section class="section">
-        <h2>Impact</h2>
-        <p>The CAC project has made a significant impact on both local wildlife protection efforts and the community. Not only has it helped reduce the number of accidents caused by stray cats hiding in car engines, but it has also raised awareness about the need to care for stray animals and prevent harm. In addition to offering immediate solutions like insulated cat shelters, we’ve also introduced programs to educate the community about TNR (Trap, Neuter, Return) practices, which have successfully reduced the local stray cat population.</p>
-        <p>Furthermore, the project’s collaborative nature has helped build stronger bonds between local residents, animal welfare organizations, and car enthusiasts. By engaging with the community, we’ve seen a wave of support, both financially and in terms of volunteer efforts.</p>
-        <p>Ultimately, CAC aims to spread across more regions, helping to ensure that stray cats are safe and that their presence does not cause any harm to vehicles or to themselves.</p>
+        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
+        <div class="text-box">
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats while also solving urban street problems.</p>
+        </div>
     </section>
 </div>
 
 <footer>
-    <p>&copy; 2024 CARS-ANTI-CATS Project | All Rights Reserved</p>
+    <p>&copy; 2025 CARS-ANTI-CATS | All Rights Reserved</p>
 </footer>
 
 <script>
-    // 展示隐藏导航
-    function showNav() {
-        document.querySelector('nav').classList.add('show');
-        document.getElementById('nav-indicator').style.display = 'block';
+    // 导航显示指示器
+    function showNavIndicator() {
+        setTimeout(function() {
+            document.getElementById("nav-indicator").style.display = 'block';
+        }, 2000); // 延迟显示指示器
     }
 
-    // 动态加载页面内容
+    // 前置动画函数
     function startAnimation() {
-        document.getElementById('preload').style.display = 'none';
-        document.getElementById('header').style.display = 'block';
-        document.getElementById('intro').style.display = 'block';
-        showNav(); // 显示导航菜单
+        document.getElementById("preload").style.display = 'none';
+        document.getElementById("header").classList.add('fade-in');
+        document.getElementById("intro").style.display = 'block';
+        showNavIndicator(); // 显示导航栏指示器
     }
 
-    // 切换显示的内容部分
+    // 显示相应部分
     function showSection(sectionId) {
-        const sections = document.querySelectorAll('.container');
-        sections.forEach(section => {
-            section.style.display = 'none';
+        document.querySelectorAll('.container').forEach(function(container) {
+            container.style.display = 'none';
         });
-
         document.getElementById(sectionId).style.display = 'block';
+
+        // 显示导航栏
+        document.getElementById('navigation').classList.add('show');
     }
+
+    // 页面滚动时触发，判断是否显示导航栏
+    window.onscroll = function() {
+        var scrollPosition = window.scrollY + window.innerHeight;
+        var documentHeight = document.documentElement.scrollHeight;
+
+        // 触发条件：滚动到距离底部200px时显示导航栏
+        if (documentHeight - scrollPosition < 200) {
+            document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'none';
+        } else {
+            document.getElementById('navigation').classList.remove('show');
+            document.getElementById('nav-indicator').style.display = 'block';
+        }
+    };
+
+    // 自动收回导航栏，若页面停滞一秒钟
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            document.getElementById('navigation').classList.remove('show');
+        }, 1500); // 滑动停止一秒后收回导航栏
+    });
+
+    // 页面加载时触发
+    window.onload = function() {
+        startAnimation();
+    };
 </script>
 
 </body>

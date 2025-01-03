@@ -5,43 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CARS-ANTI-CATS Project</title>
     <style>
-        /* 页面背景设置 */
+        /* 统一的像素风格字体 */
         body {
             font-family: 'Courier New', Courier, monospace;
-            background-image: url('images/images/bG.jpg'); /* 网站背景图片 */
-            background-size: cover;
-            background-position: center;
+            background-color: #fff;
             color: #333;
             margin: 0;
             padding: 0;
             text-align: center;
             overflow-x: hidden;
-            height: 100vh;
-        }
-
-        /* 前置动画 - 图片和文本 */
-        #preload {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/images/0.jpg');
-            background-size: cover;
-            background-position: center;
+            min-height: 100vh; /* 确保 body 足够高 */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        #preload .text {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 4rem;
-            color: white;
-            text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
+            flex-direction: column;
         }
 
         /* 动态加载效果 */
@@ -58,50 +33,53 @@
             }
         }
 
-        /* 头部内容 */
         header {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(255, 112, 67, 0.8); /* 橘红色背景，带透明度 */
+            background: #FF7043; /* 橘红色背景 */
             color: #fff;
-            padding: 2rem 2rem;
+            padding: 1rem 2rem;
             position: relative;
-            z-index: 20;
-            font-size: 3rem; /* 增大字体 */
+            z-index: 10;
+        }
+
+        header img.logo {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 4rem; /* 放大标题字体 */
+            font-size: 2rem;
             font-weight: bold;
             text-transform: uppercase;
         }
 
         header p {
             margin: 0;
-            font-size: 2rem; /* 放大副标题字体 */
+            font-size: 1.2rem;
         }
 
         /* 导航菜单 */
         nav {
             position: fixed;
-            bottom: 20px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             background: #333;
             color: #fff;
             padding: 1rem;
             border-radius: 10px;
-            z-index: 20;
-            display: none; /* 初始隐藏 */
+            z-index: 10;
         }
 
         nav a {
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
-            font-size: 1.8rem; /* 恢复导航栏字体大小 */
+            font-size: 1.2rem;
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
             transition: transform 0.3s ease-in-out;
@@ -111,7 +89,6 @@
             transform: scale(1.2);
         }
 
-        /* 内容容器 */
         .container {
             width: 80%;
             margin: auto;
@@ -119,14 +96,12 @@
             display: none; /* 初始隐藏 */
         }
 
-        /* 各部分样式 */
         .section {
-            margin-bottom: 3rem;
-            padding: 3rem;
-            border: 3px dashed #FF7043;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 2px dashed #FF7043;
             border-radius: 10px;
-            background: rgba(244, 244, 249, 0.9); /* 淡色背景，带透明度 */
-            font-size: 2.5rem; /* 页面内容字体增大 */
+            background: #f4f4f9;
         }
 
         .section img {
@@ -136,32 +111,46 @@
             margin: 0 auto;
         }
 
+        /* 新增背景图片 */
+        body {
+            background-image: url('images/images/bG.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
         footer {
             background: #333;
             color: #fff;
             text-align: center;
             padding: 1rem;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+            margin-top: auto; /* 确保 footer 推到页面底部 */
+        }
+
+        /* 高亮显示社区部分的数字 */
+        .highlight {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF7043;
         }
     </style>
 </head>
 <body>
 
-<!-- 前置动画区域 -->
-<div id="preload">
-    <div class="text" onclick="startAnimation()">click to view CAC</div>
+<!-- 前置动画部分 -->
+<div id="preloader">
+    <img src="images/images/0.jpg" id="preload-image" alt="Preload Image">
+    <div id="preload-text">click to view CAC</div>
 </div>
 
-<header id="header" class="fade-in">
+<header class="fade-in">
+    <img src="https://github.com/ZZZZZZ-K/cars-anti-cats/raw/main/images/images/44e311cbb69fe79fe5e47b0f6a53b4e.png" alt="猫猫" class="logo">
     <div>
         <h1>CARS-ANTI-CATS Project</h1>
         <p>A community-driven solution to protect stray cats and ensure safety</p>
     </div>
 </header>
 
-<!-- 各部分内容 -->
+<!-- 介绍部分 -->
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
@@ -170,26 +159,31 @@
 </div>
 
 <!-- 导航菜单 -->
-<nav id="navigation">
+<nav>
     <a href="#about" onclick="showSection('intro')">About</a>
     <a href="#how-it-works" onclick="showSection('how-it-works')">How it works</a>
     <a href="#community" onclick="showSection('community')">Community</a>
     <a href="#impact" onclick="showSection('impact')">Impact</a>
 </nav>
 
+<!-- 各部分内容 -->
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
-        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
+        <img src="https://github.com/ZZZZZZ-K/cars-anti-cats/raw/main/images/images/e2bec1381900cc19d1743e6787ef717.png" alt="CARS-ANTI-CATS System Diagram">
         <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
     </section>
 </div>
 
+<!-- COMMUNITY部分 -->
 <div class="container fade-in" id="community">
     <section class="section">
         <h2>Community Engagement</h2>
-        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
-        <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats.</p> <!-- 加入Community故事 -->
+        <img src="https://github.com/ZZZZZZ-K/cars-anti-cats/raw/main/images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
+        <p>I reached out to local residents who regularly feed stray cats and shared my project with them. After getting approval from property management, we placed cat shelters in designated areas. Over the past two years, the stray cat population, which previously included cats seeking warmth in the underground parking garage, has been significantly reduced. This winter, no strays have been found in the garage. Through TNR, we controlled the stray population, leaving only three cats still roaming, all of which are now housed in warm shelters. The rest have been adopted.</p>
+    </section>
+    <section class="section">
+        <p class="highlight">11 stray cats to 3, 0 cats in garage 2024 winter</p>
     </section>
 </div>
 
@@ -200,43 +194,30 @@
     </section>
 </div>
 
+<!-- 页脚部分 -->
 <footer>
     <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
 </footer>
 
 <script>
-    // 前置动画功能
-    let preloadDiv = document.getElementById('preload');
-    let clickText = document.querySelector('.text');
-    let currentImageIndex = 1;
-
-    function startAnimation() {
-        clickText.style.display = 'none'; // 隐藏点击文字
-        showPathImages(); // 显示路径图片
-    }
-
-    function showPathImages() {
-        let pathImagesInterval = setInterval(() => {
-            if (currentImageIndex <= 9) {
-                preloadDiv.style.backgroundImage = `url('images/images/${currentImageIndex}.jpg')`;
-                currentImageIndex++;
-            } else {
-                clearInterval(pathImagesInterval); // 播放完所有图片后停止
-                preloadDiv.style.display = 'none'; // 隐藏前置动画
-                document.getElementById('navigation').style.display = 'block'; // 显示导航
-                showSection('intro'); // 显示内容部分
-            }
-        }, 100); // 每100毫秒显示一张图片
-    }
-
-    // 显示不同的页面部分
     function showSection(sectionId) {
+        // 隐藏所有部分
         const sections = document.querySelectorAll('.container');
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        document.getElementById(sectionId).style.display = 'block';
+        sections.forEach(section => section.style.display = 'none');
+
+        // 显示点击的部分
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.style.display = 'block';
     }
+
+    // 默认显示About部分
+    showSection('intro');
+
+    // 前置动画显示控制
+    document.getElementById('preloader').addEventListener('click', function() {
+        document.getElementById('preloader').style.display = 'none';
+        document.body.style.overflow = 'auto'; // 取消禁止滚动
+    });
 </script>
 
 </body>

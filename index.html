@@ -44,17 +44,6 @@
             cursor: pointer;
         }
 
-        /* 前置视频样式 */
-        .intro-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;  /* 保证视频填充整个屏幕 */
-            z-index: -1;  /* 使视频位于文字下方 */
-        }
-
         /* 动态加载效果 */
         .fade-in {
             animation: fadeIn 2s ease-in-out forwards;
@@ -210,10 +199,6 @@
 
 <!-- 前置动画区域 -->
 <div id="preload">
-    <video autoplay muted loop class="intro-video">
-        <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
     <div class="text" onclick="startAnimation()">click to view CAC</div>
 </div>
 
@@ -223,6 +208,11 @@
         <p>A community-driven solution to protect stray cats and ensure safety</p>
     </div>
 </header>
+
+<!-- 引导页视频 -->
+<video autoplay muted loop id="intro-video" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+    <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
+</video>
 
 <!-- 各部分内容 -->
 <div class="container fade-in" id="intro">
@@ -247,56 +237,45 @@
     <section class="section">
         <h2>How It Works</h2>
         <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
-        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
+        <p>The system, powered by a <strong>Raspberry Pi 4</strong>, uses infrared (IR) sensors to detect the presence of a cat near the vehicle. Once a cat is detected, the system activates an ultrasonic sound emitter to deter the cat. If multiple sensors detect the cat simultaneously, the sound intensity increases to enhance the deterrent effect.</p>
+        <p><strong>Key Components:</strong></p>
+        <ul>
+            <li><strong>Raspberry Pi 4:</strong> The central processing unit that collects data from the infrared sensors and controls the ultrasonic sound emitter.</li>
+            <li><strong>Infrared Sensors (7 units):</strong> These sensors are placed around the vehicle to detect motion. Each sensor sends a HIGH signal when a cat is detected and a LOW signal when there is no detection.</li>
+            <li><strong>Ultrasonic Sound Emitter:</strong> This device emits high-frequency sound to repel the cat when activated. The sound intensity increases based on the number of sensors triggered.</li>
+            <li><strong>Power Supply:</strong> The system draws power from the vehicle’s 12V battery via a step-down module (DC-DC converter) to convert the voltage to 5V. A back-up lithium battery is required if the vehicle’s battery is unavailable.</li>
+        </ul>
     </section>
 </div>
 
-<!-- COMMUNITY 部分 -->
 <div class="container fade-in" id="community">
     <section class="section">
-        <h2><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</h2>
-    </section>
-    <section>
-        <h2>Community Engagement</h2>
-        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
-        <div class="text-box">
-            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with local shelters, we were able to implement the system and offer adoption opportunities for the cats. More than 80% of cats found forever homes.</p>
-        </div>
+        <h2>Our Community</h2>
+        <p>This project is supported by a growing community of animal lovers and engineers. We encourage everyone to contribute, whether it's through donations, adoption, or volunteering to help improve the system.</p>
+        <p class="highlight">Join Us!</p>
     </section>
 </div>
 
-<!-- Impact Section -->
-<div class="container fade-in" id="impact">
-    <section class="section">
-        <h2>Impact and Future Directions</h2>
-        <p>The impact of this project is far-reaching. It has not only helped improve the safety and well-being of stray cats, but also fostered a greater sense of community responsibility and awareness. With future iterations, we hope to expand the reach of the system and continue making a positive difference for animals in need.</p>
-    </section>
-</div>
-
-<!-- 页脚 -->
 <footer>
     <p>&copy; 2025 CARS-ANTI-CATS. All rights reserved.</p>
 </footer>
 
 <script>
-    // 加载引导页后，移除页面前置动画
     function startAnimation() {
         document.getElementById('preload').style.display = 'none';
-        document.getElementById('header').style.display = 'block';
+        document.getElementById('header').style.display = 'flex';
         document.getElementById('navigation').classList.add('show');
         document.getElementById('nav-indicator').style.display = 'block';
+        document.querySelectorAll('.container').forEach(function (container) {
+            container.style.display = 'block';
+        });
     }
 
-    // 显示特定部分内容
-    function showSection(section) {
-        let sections = document.querySelectorAll('.container');
-        sections.forEach(s => s.style.display = 'none');
-        document.getElementById(section).style.display = 'block';
-    }
-
-    // 初始加载显示介绍部分
-    window.onload = function() {
-        showSection('intro');
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(function (container) {
+            container.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
     }
 </script>
 

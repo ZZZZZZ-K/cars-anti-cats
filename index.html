@@ -44,6 +44,17 @@
             cursor: pointer;
         }
 
+        /* 前置视频样式 */
+        .intro-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* 保证视频填充整个屏幕 */
+            z-index: -1;  /* 使视频位于文字下方 */
+        }
+
         /* 动态加载效果 */
         .fade-in {
             animation: fadeIn 2s ease-in-out forwards;
@@ -199,7 +210,11 @@
 
 <!-- 前置动画区域 -->
 <div id="preload">
-    <div class="text" id="preload-text">this website will introduce you my work on CAC system. If you want to know more, click on the webpage after the click sign appears.</div>
+    <video autoplay muted loop class="intro-video">
+        <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="text" onclick="startAnimation()">click to view CAC</div>
 </div>
 
 <header id="header" class="fade-in">
@@ -213,7 +228,7 @@
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
-        <p>CAC（CARS-ANTI-CATS) is a community project that combines system design with animal protection efforts. The purpose of CAC system is to prevent stray cats from entering vehicle parts for warmth, avoiding injury or death.</p>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle..</p>
     </section>
 </div>
 
@@ -231,8 +246,8 @@
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
-        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
-        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats.</p>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
+        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
     </section>
 </div>
 
@@ -245,65 +260,43 @@
         <h2>Community Engagement</h2>
         <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
         <div class="text-box">
-            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats while also solving urban street problems.</p>
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with local shelters, we were able to implement the system and offer adoption opportunities for the cats. More than 80% of cats found forever homes.</p>
         </div>
     </section>
 </div>
 
+<!-- Impact Section -->
+<div class="container fade-in" id="impact">
+    <section class="section">
+        <h2>Impact and Future Directions</h2>
+        <p>The impact of this project is far-reaching. It has not only helped improve the safety and well-being of stray cats, but also fostered a greater sense of community responsibility and awareness. With future iterations, we hope to expand the reach of the system and continue making a positive difference for animals in need.</p>
+    </section>
+</div>
 
+<!-- 页脚 -->
 <footer>
-    <p>&copy; 2025 CARS-ANTI-CATS | All Rights Reserved</p>
+    <p>&copy; 2025 CARS-ANTI-CATS. All rights reserved.</p>
 </footer>
 
 <script>
-    // 引导页文字逐句显示函数
-    let preloadText = [
-        "this website will introduce you my work on CAC system.",
-        "If you want to know more, click on the webpage after the click sign appears."
-    ];
-    let currentTextIndex = 0;
-
-    function typeText() {
-        if (currentTextIndex < preloadText.length) {
-            let textDiv = document.getElementById('preload-text');
-            let currentText = preloadText[currentTextIndex];
-            let i = 0;
-            textDiv.innerHTML = '';
-            let typingInterval = setInterval(() => {
-                textDiv.innerHTML += currentText.charAt(i);
-                i++;
-                if (i > currentText.length) {
-                    clearInterval(typingInterval);
-                    currentTextIndex++;
-                    setTimeout(typeText, 2000); // 每2秒逐句显示
-                }
-            }, 100);
-        } else {
-            // 最后显示"CLICK"按钮
-            setTimeout(() => {
-                let textDiv = document.getElementById('preload-text');
-                textDiv.innerHTML = 'CLICK';
-                textDiv.style.cursor = 'pointer';
-                textDiv.addEventListener('click', () => {
-                    document.getElementById('preload').style.display = 'none'; // 隐藏前置动画
-                    document.getElementById('header').style.display = 'block'; // 显示内容
-                    document.getElementById('navigation').classList.add('show'); // 显示导航
-                    document.getElementById('nav-indicator').style.display = 'block'; // 显示小箭头
-                    document.getElementById('intro').style.display = 'block'; // 显示内容
-                });
-            }, 1000);
-        }
+    // 加载引导页后，移除页面前置动画
+    function startAnimation() {
+        document.getElementById('preload').style.display = 'none';
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('navigation').classList.add('show');
+        document.getElementById('nav-indicator').style.display = 'block';
     }
 
-    typeText(); // 启动逐句显示文字
-
-    // 显示指定部分
-    function showSection(id) {
+    // 显示特定部分内容
+    function showSection(section) {
         let sections = document.querySelectorAll('.container');
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        document.getElementById(id).style.display = 'block';
+        sections.forEach(s => s.style.display = 'none');
+        document.getElementById(section).style.display = 'block';
+    }
+
+    // 初始加载显示介绍部分
+    window.onload = function() {
+        showSection('intro');
     }
 </script>
 

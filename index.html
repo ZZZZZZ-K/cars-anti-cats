@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,20 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CARS-ANTI-CATS Project</title>
     <style>
-        /* Body and Background */
+        /* 统一的像素风格字体 */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 0;
+            text-align: center;
+            overflow-x: hidden;
             background-color: #f4f4f9;
             color: #333;
-            background-image: url('images/images/bG.jpg'); /* Background Image */
-            background-size: cover;
-            background-position: center;
-            overflow-x: hidden;
         }
 
-        /* Pre-Animation */
+        /* 前置动画 */
         .preload {
             position: fixed;
             top: 0;
@@ -30,6 +29,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            flex-direction: column;
         }
 
         .preload img {
@@ -47,7 +47,7 @@
             animation: fadeInText 1.5s ease-out;
         }
 
-        /* Animation for Preload */
+        /* 动画效果 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -68,21 +68,78 @@
             }
         }
 
-        /* Header and Content */
-        header {
-            text-align: center;
-            padding: 2rem 0;
-            color: #fff;
+        /* 网站背景 */
+        body {
+            background-image: url('images/images/bG.jpg'); /* 网站背景图 */
+            background-size: cover;
+            background-position: center;
         }
 
+        /* Header */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #FF7043; /* 橘红色背景 */
+            color: #fff;
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        /* 导航菜单 */
+        nav {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            transform: scale(1.2);
+        }
+
+        /* 内容容器 */
         .container {
             width: 80%;
             margin: auto;
-            padding: 20px 0;
+            padding: 20px;
+            display: none; /* 初始隐藏 */
         }
 
         .section {
             margin-bottom: 2rem;
+            padding: 2rem;
+            border: 2px dashed #FF7043;
+            border-radius: 10px;
+            background: #f4f4f9;
         }
 
         .section img {
@@ -92,93 +149,129 @@
             margin: 0 auto;
         }
 
-        /* Community Stats */
-        .community-stats {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #FF5733; /* Orange-Red Color */
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .section h2 {
-            color: #FF5733;
-        }
-
+        /* 页脚 */
         footer {
             background: #333;
             color: #fff;
             text-align: center;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
+            padding: 1rem;
+            position: absolute;
             bottom: 0;
-            left: 0;
-            z-index: 9999;
+            width: 100%;
+            z-index: 10;
         }
 
-        /* Remove Image and Text */
-        .hide {
-            display: none;
+        /* 页面底部最底层 */
+        .footer-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
+
+        /* 高亮显示 */
+        .highlight {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF7043;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Preload Animation -->
-    <div class="preload" id="preload">
-        <img src="images/images/0.jpg" alt="Preload Image">
-        <div class="preload-text">Click to View CAC</div>
-    </div>
+<!-- 前置动画 -->
+<div class="preload" id="preload">
+    <img src="images/images/0.jpg" alt="Preload Image" id="preloadImage">
+    <div class="preload-text" id="preloadText">Click to view CAC</div>
+</div>
 
-    <!-- Header -->
-    <header>
+<!-- Header -->
+<header class="fade-in">
+    <div>
         <h1>CARS-ANTI-CATS Project</h1>
         <p>A community-driven solution to protect stray cats and ensure safety</p>
-    </header>
-
-    <!-- Container -->
-    <div class="container">
-        <div class="community-stats">
-            11 stray cats to 3, 0 cats in garage 2024 winter.
-        </div>
-
-        <section class="section">
-            <h2>About the Project</h2>
-            <p>The CARS-ANTI-CATS (CAC) system is an innovative solution designed to prevent stray cats from seeking warmth under car engines, reducing accidents and ensuring the safety of both cats and vehicles. The system uses infrared sensors to detect cats and emits harmless sound waves to deter them. This project combines technology and empathy to address a significant community concern.</p>
-        </section>
-
-        <section class="section">
-            <h2>How It Works</h2>
-            <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
-            <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
-        </section>
-
-        <section class="section">
-            <h2>Community Engagement</h2>
-            <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
-            <img src="images/images/cat_shelter_image.png" alt="Community Cat Shelter">
-            <p>I reached out to local residents who regularly feed stray cats and shared my project with them. After getting approval from property management, we placed cat shelters in designated areas. Over the past two years, the stray cat population, which previously included cats seeking warmth in the underground parking garage, has been significantly reduced. This winter, no strays have been found in the garage. Through TNR, we controlled the stray population, leaving only three cats still roaming, all of which are now housed in warm shelters. The rest have been adopted.</p>
-        </section>
-
-        <section class="section">
-            <h2>Impact and Vision</h2>
-            <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world problems. It reflects the importance of shared concerns driving collective action and showcases how innovation can be used to create sustainable solutions.</p>
-            <p>My hope is to inspire others to think critically and creatively about the challenges in their communities, finding ways to make a tangible, positive impact.</p>
-        </section>
     </div>
+</header>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
-    </footer>
+<!-- 导航菜单 -->
+<nav>
+    <a href="#about" onclick="showSection('intro')">About</a>
+    <a href="#how-it-works" onclick="showSection('how-it-works')">How it works</a>
+    <a href="#community" onclick="showSection('community')">Community</a>
+    <a href="#impact" onclick="showSection('impact')">Impact</a>
+</nav>
 
-    <!-- JS for Preload Animation -->
-    <script>
-        document.getElementById('preload').addEventListener('click', function () {
-            document.getElementById('preload').classList.add('hide');
-        });
-    </script>
+<!-- 各部分内容 -->
+<div class="container fade-in" id="intro">
+    <section class="section">
+        <h2>About the Project</h2>
+        <p>The CARS-ANTI-CATS (CAC) system is an innovative solution designed to prevent stray cats from seeking warmth under car engines, reducing accidents and ensuring the safety of both cats and vehicles. The system uses infrared sensors to detect cats and emits harmless sound waves to deter them. This project combines technology and empathy to address a significant community concern.</p>
+    </section>
+</div>
+
+<div class="container fade-in" id="how-it-works">
+    <section class="section">
+        <h2>How It Works</h2>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
+        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
+    </section>
+</div>
+
+<div class="container fade-in" id="community">
+    <section class="section">
+        <h2>Community Engagement</h2>
+        <p class="highlight">11 stray cats to 3, 0 cats in garage 2024 winter.</p>
+        <img src="images/images/community.jpg" alt="Community Engagement">
+        <p>I reached out to local residents who regularly feed stray cats and shared my project with them. After getting approval from property management, we placed cat shelters in designated areas. Over the past two years, the stray cat population, which previously included cats seeking warmth in the underground parking garage, has been significantly reduced. This winter, no strays have been found in the garage. Through TNR, we controlled the stray population, leaving only three cats still roaming, all of which are now housed in warm shelters. The rest have been adopted.</p>
+    </section>
+</div>
+
+<div class="container fade-in" id="impact">
+    <section class="section">
+        <h2>Impact and Vision</h2>
+        <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world problems. It reflects the importance of shared concerns driving collective action and showcases how innovation can be used to create sustainable solutions.</p>
+    </section>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer-bottom">
+    <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
+</footer>
+
+<script>
+    // 前置动画逐帧显示效果
+    let currentFrame = 0;
+    const totalFrames = 9; // 总帧数
+    const preloadImage = document.getElementById('preloadImage');
+    const preloadText = document.getElementById('preloadText');
+
+    function showFrames() {
+        if (currentFrame < totalFrames) {
+            currentFrame++;
+            preloadImage.src = `images/images/${currentFrame}.jpg`;
+        } else {
+            // 动画完成后隐藏前置动画区域
+            document.getElementById('preload').style.display = 'none';
+        }
+    }
+
+    // 点击开始帧动画
+    preloadText.addEventListener('click', function() {
+        preloadText.style.display = 'none';
+        setInterval(showFrames, 100); // 每100毫秒切换一帧
+    });
+
+    // 默认显示About部分
+    showSection('intro');
+
+    // 页面内容切换函数
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.container');
+        sections.forEach(section => section.style.display = 'none');
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.style.display = 'block';
+    }
+</script>
 
 </body>
 </html>

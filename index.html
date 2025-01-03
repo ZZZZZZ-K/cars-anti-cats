@@ -169,6 +169,20 @@
             color: #FF7043; /* 高亮数字颜色 */
         }
 
+        /* 添加文本框样式 */
+        .text-box {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            font-size: 1.6rem;
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #FF7043;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-y: scroll;
+        }
+
         footer {
             background: #333;
             color: #fff;
@@ -225,20 +239,14 @@
 <!-- COMMUNITY 部分 -->
 <div class="container fade-in" id="community">
     <section class="section">
-        <h2>11 stray cats to 3, 0 cats in garage 2024 winter</h2> <!-- 修改：将标题置于上方 -->
-        <p><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</p>
+        <h2><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</h2>
     </section>
     <section>
         <h2>Community Engagement</h2>
         <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
-        <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats.</p>
-    </section>
-</div>
-
-<div class="container fade-in" id="impact">
-    <section class="section">
-        <h2>Impact and Vision</h2>
-        <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world issues. It demonstrates how small-scale, community-driven initiatives can create a positive change. The solution not only protects cats but also raises awareness about the ethical responsibility to care for stray animals.</p>
+        <div class="text-box">
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats while also solving urban street problems.</p>
+        </div>
     </section>
 </div>
 
@@ -247,19 +255,19 @@
 </footer>
 
 <script>
+    // 导航显示指示器
+    function showNavIndicator() {
+        setTimeout(function() {
+            document.getElementById("nav-indicator").style.display = 'block';
+        }, 2000); // 延迟显示指示器
+    }
+
     // 前置动画函数
     function startAnimation() {
         document.getElementById("preload").style.display = 'none';
         document.getElementById("header").classList.add('fade-in');
         document.getElementById("intro").style.display = 'block';
         showNavIndicator(); // 显示导航栏指示器
-    }
-
-    // 导航显示指示器
-    function showNavIndicator() {
-        setTimeout(function() {
-            document.getElementById("nav-indicator").style.display = 'block';
-        }, 2000); // 延迟显示指示器
     }
 
     // 显示相应部分
@@ -287,6 +295,15 @@
             document.getElementById('nav-indicator').style.display = 'block';
         }
     };
+
+    // 自动收回导航栏，若页面停滞一秒钟
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            document.getElementById('navigation').classList.remove('show');
+        }, 1000); // 滑动停止一秒后收回导航栏
+    });
 
     // 页面加载时触发
     window.onload = function() {

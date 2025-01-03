@@ -193,13 +193,50 @@
             width: 100%;
             z-index: 10;
         }
+
+        /* 视频背景引导部分 */
+        #video-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video-intro video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #video-intro .text {
+            position: absolute;
+            font-size: 4rem;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
+<!-- 视频引导部分 -->
+<div id="video-intro">
+    <video autoplay muted onended="startAnimation()">
+        <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
+    </video>
+    <div class="text" onclick="startAnimation()">click to view CAC</div>
+</div>
+
 <!-- 前置动画区域 -->
 <div id="preload">
-    <div class="text" id="preload-text">this website will introduce you my work on CAC system. If you want to know more, click on the webpage after the click sign appears.</div>
+    <div class="text" onclick="startAnimation()">click to view CAC</div>
 </div>
 
 <header id="header" class="fade-in">
@@ -213,7 +250,7 @@
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
-        <p>CAC（CARS-ANTI-CATS) is a community project that combines system design with animal protection efforts. The purpose of CAC system is to prevent stray cats from entering vehicle parts for warmth, avoiding injury or death.</p>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle..</p>
     </section>
 </div>
 
@@ -231,80 +268,53 @@
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
-        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
-        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats.</p>
+        <p>Developed a system based on Raspberry Pi 4 that detects the presence of a cat near a vehicle using infrared (IR) sensors, and triggers an ultrasonic sound emitter to deter the cat. The system should increase the sound intensity if multiple sensors detect the cat simultaneously. Raspberry Pi 4: The central control unit that processes inputs from the infrared sensors and controls the ultrasonic emitter. Infrared Sensors (7 units): Positioned around the vehicle to detect motion. Each sensor outputs a HIGH signal when a cat is detected and LOW when not. Ultrasonic Sound Emitter: Emits ultrasonic sound when activated. The intensity of the sound increases based on the number of sensors detecting the cat. Battery supply: The system draws power from the vehicle’s 12V battery though a step-down module (DC-DC converter) to convert the voltage to 5v back-up supply lithium battery is required if vehicle battery is not supplying.</p>
     </section>
 </div>
 
-<!-- COMMUNITY 部分 -->
+<!-- 社区部分 -->
 <div class="container fade-in" id="community">
     <section class="section">
-        <h2><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</h2>
-    </section>
-    <section>
-        <h2>Community Engagement</h2>
-        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
-        <div class="text-box">
-            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats while also solving urban street problems.</p>
-        </div>
+        <h2>Community</h2>
+        <p>Our project is supported by a passionate community of animal lovers and engineers. We collaborate with local shelters to promote the TNR (trap-neuter-return) initiative and raise awareness about the safety of stray cats. Together, we make a real impact!</p>
     </section>
 </div>
 
-
 <footer>
-    <p>&copy; 2025 CARS-ANTI-CATS | All Rights Reserved</p>
+    <p>&copy; 2025 CARS-ANTI-CATS. All Rights Reserved.</p>
 </footer>
 
 <script>
-    // 引导页文字逐句显示函数
-    let preloadText = [
-        "this website will introduce you my work on CAC system.",
-        "If you want to know more, click on the webpage after the click sign appears."
-    ];
-    let currentTextIndex = 0;
+    let isAnimationStarted = false;
 
-    function typeText() {
-        if (currentTextIndex < preloadText.length) {
-            let textDiv = document.getElementById('preload-text');
-            let currentText = preloadText[currentTextIndex];
-            let i = 0;
-            textDiv.innerHTML = '';
-            let typingInterval = setInterval(() => {
-                textDiv.innerHTML += currentText.charAt(i);
-                i++;
-                if (i > currentText.length) {
-                    clearInterval(typingInterval);
-                    currentTextIndex++;
-                    setTimeout(typeText, 2000); // 每2秒逐句显示
-                }
-            }, 100);
-        } else {
-            // 最后显示"CLICK"按钮
-            setTimeout(() => {
-                let textDiv = document.getElementById('preload-text');
-                textDiv.innerHTML = 'CLICK';
-                textDiv.style.cursor = 'pointer';
-                textDiv.addEventListener('click', () => {
-                    document.getElementById('preload').style.display = 'none'; // 隐藏前置动画
-                    document.getElementById('header').style.display = 'block'; // 显示内容
-                    document.getElementById('navigation').classList.add('show'); // 显示导航
-                    document.getElementById('nav-indicator').style.display = 'block'; // 显示小箭头
-                    document.getElementById('intro').style.display = 'block'; // 显示内容
-                });
-            }, 1000);
+    function startAnimation() {
+        if (!isAnimationStarted) {
+            isAnimationStarted = true;
+            document.getElementById('video-intro').style.display = 'none'; // 隐藏视频
+            document.getElementById('preload').style.display = 'none'; // 隐藏前置动画
+            showSection('intro');
         }
     }
 
-    typeText(); // 启动逐句显示文字
-
-    // 显示指定部分
-    function showSection(id) {
-        let sections = document.querySelectorAll('.container');
-        sections.forEach(section => {
-            section.style.display = 'none';
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(function(section) {
+            section.style.display = 'none'; // 隐藏所有section
         });
-        document.getElementById(id).style.display = 'block';
+
+        document.getElementById(sectionId).style.display = 'block'; // 显示对应section
+
+        if (sectionId === 'intro') {
+            document.getElementById('nav-indicator').style.display = 'none'; // 隐藏箭头
+        } else {
+            document.getElementById('nav-indicator').style.display = 'block'; // 显示箭头
+        }
     }
+
+    window.onload = function() {
+        setTimeout(function() {
+            document.getElementById('navigation').classList.add('show');
+        }, 5000); // 延迟5秒显示导航
+    };
 </script>
 
 </body>

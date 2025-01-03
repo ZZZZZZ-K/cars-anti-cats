@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -193,6 +193,15 @@
             width: 100%;
             z-index: 10;
         }
+
+        /* 特殊调整文字部分字号 */
+        #intro p {
+            font-size: 1.6rem; /* 调整文字字号 */
+        }
+
+        #intro p.special {
+            font-size: 1.4rem; /* 调整某些特殊段落的字号 */
+        }
     </style>
 </head>
 <body>
@@ -214,7 +223,7 @@
     <section class="section">
         <h2>About the Project</h2>
         <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
-        <p style="font-size: 1.4rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
+        <p class="special">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
     </section>
 </div>
 
@@ -246,38 +255,28 @@
         <h2>Community Engagement</h2>
         <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
         <div class="text-box">
-            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were set up in designated spots. The goal was not just to protect the cats from harm but also to enhance community awareness.</p>
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in schools, pet stores, and collaborations with animal protection volunteers, I spread awareness about the safety and importance of the CAC system. Many community members were eager to participate, contributing both financially and by donating their time for TNR programs.</p>
         </div>
     </section>
 </div>
 
-<!-- IMPACT 部分 -->
-<div class="container fade-in" id="impact">
-    <section class="section">
-        <h2>Impact</h2>
-        <p>The impact of this project has been profound. As of 2024 winter, the number of stray cats in our local parking garage has drastically decreased. Thanks to the collaboration of the community, the protection measures, and the overall engagement with the CAC project, stray cats are now safer and healthier.</p>
-    </section>
-</div>
-
-<!-- 页脚 -->
 <footer>
-    <p>&copy; 2024 Cars-anti-cats Project | Developed by ZZ(K)</p>
+    <p>&copy; 2025 CARS-ANTI-CATS Project | All rights reserved.</p>
 </footer>
 
 <script>
     function startAnimation() {
         document.getElementById('preload').style.display = 'none';
-        document.body.style.overflow = 'auto';
-        setTimeout(function() {
-            document.getElementById('header').style.opacity = 1;
-        }, 1000);
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('navigation').classList.add('show');
+        document.getElementById('nav-indicator').style.display = 'block';
     }
 
-    function showSection(sectionId) {
-        document.querySelectorAll('.container').forEach(function(container) {
-            container.style.display = 'none';
+    function showSection(id) {
+        document.querySelectorAll('.container').forEach(function(section) {
+            section.style.display = 'none';
         });
-        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById(id).style.display = 'block';
     }
 </script>
 

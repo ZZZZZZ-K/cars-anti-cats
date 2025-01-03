@@ -86,7 +86,7 @@
         /* 导航菜单 */
         nav {
             position: fixed;
-            bottom: 20px;
+            bottom: -100px; /* 初始隐藏在屏幕下方 */
             left: 50%;
             transform: translateX(-50%);
             background: #333;
@@ -94,7 +94,9 @@
             padding: 1rem;
             border-radius: 10px;
             z-index: 20;
-            display: none; /* 初始隐藏 */
+            display: flex;
+            justify-content: center;
+            transition: bottom 0.3s ease;
         }
 
         nav a {
@@ -109,6 +111,11 @@
 
         nav a:hover {
             transform: scale(1.2);
+        }
+
+        /* 显示导航 */
+        nav.show {
+            bottom: 20px; /* 显示时在屏幕底部 */
         }
 
         /* 内容容器 */
@@ -200,13 +207,13 @@
 <!-- COMMUNITY 部分 -->
 <div class="container fade-in" id="community">
     <section class="section">
+        <h2>11 stray cats to 3, 0 cats in garage 2024 winter</h2> <!-- 修改：将标题置于上方 -->
+        <p><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</p>
+    </section>
+    <section>
         <h2>Community Engagement</h2>
         <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
         <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who share a common goal of improving the lives of stray cats.</p>
-    </section>
-    <section>
-        <h2>11 stray cats to 3, 0 cats in garage 2024 winter</h2>
-        <p><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</p>
     </section>
 </div>
 
@@ -233,34 +240,40 @@
     }
 
     function showPathImages() {
-        let pathImagesInterval = setInterval(() => {
-            if (currentImageIndex <= 9) {
-                preloadDiv.style.backgroundImage = `url('images/images/${currentImageIndex}.jpg')`;
-                currentImageIndex++;
-            } else {
-                clearInterval(pathImagesInterval); // 播放完所有图片后停止
-                preloadDiv.style.display = 'none'; // 隐藏前置动画
-                document.body.style.overflow = 'auto'; // 允许页面滚动
-                showContent(); // 显示页面内容
-            }
-        }, 500); // 每0.5秒切换一张图片
+        let pathImages = ['images/images/1.jpg', 'images/images/2.jpg', 'images/images/3.jpg']; // 路径图片
+        if (currentImageIndex < pathImages.length) {
+            preloadDiv.style.backgroundImage = `url(${pathImages[currentImageIndex]})`;
+            currentImageIndex++;
+            setTimeout(showPathImages, 2000);
+        } else {
+            preloadDiv.style.display = 'none'; // 隐藏前置动画区域
+            document.getElementById('header').style.display = 'block'; // 显示标题
+            document.querySelector('#navigation').style.display = 'flex'; // 显示导航栏
+            showSection('intro'); // 显示介绍内容
+        }
     }
 
-    // 显示各部分内容
+    // 导航栏显示和隐藏
+    let nav = document.getElementById('navigation');
+    let navTimeout;
+
+    window.addEventListener('mousemove', (event) => {
+        if (event.clientY > window.innerHeight - 10) {
+            clearTimeout(navTimeout);
+            nav.classList.add('show');
+        } else {
+            navTimeout = setTimeout(() => {
+                nav.classList.remove('show');
+            }, 1000); // 等待一秒后隐藏导航栏
+        }
+    });
+
+    // 显示特定部分内容
     function showSection(sectionId) {
-        document.querySelectorAll('.container').forEach(section => {
-            section.style.display = 'none';
-        });
-        document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // 显示页面内容
-    function showContent() {
-        document.getElementById('header').classList.add('fade-in');
-        document.getElementById('navigation').style.display = 'block'; // 显示导航
-        showSection('intro'); // 默认显示关于内容
+        const sections = document.querySelectorAll('.container');
+        sections.forEach(section => section.style.display = 'none'); // 隐藏所有部分
+        document.getElementById(sectionId).style.display = 'block'; // 显示当前部分
     }
 </script>
-
 </body>
 </html>

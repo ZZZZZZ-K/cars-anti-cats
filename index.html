@@ -33,6 +33,7 @@
             }
         }
 
+        /* 头部内容 */
         header {
             display: flex;
             justify-content: center;
@@ -42,12 +43,6 @@
             padding: 1rem 2rem;
             position: relative;
             z-index: 10;
-        }
-
-        header img.logo {
-            width: 50px;
-            height: auto;
-            margin-right: 15px;
         }
 
         header h1 {
@@ -123,16 +118,28 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* 前置视频 */
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
 
 <!-- 前置视频 -->
-<video id="intro-video" class="fade-in" autoplay muted>
+<video id="intro-video" autoplay muted>
     <source src="images/intro-video.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
+<!-- 头部内容 -->
 <header id="header" class="fade-in" style="display: none;">
     <div>
         <h1>CARS-ANTI-CATS Project</h1>
@@ -189,11 +196,17 @@
     // 前置视频播放完成后显示导航菜单和头部内容
     const introVideo = document.getElementById('intro-video');
     introVideo.addEventListener('ended', function() {
-        // 显示导航菜单
+        // 隐藏前置视频
+        introVideo.style.display = 'none';
+
+        // 显示导航菜单和头部
         const navigation = document.getElementById('navigation');
         const header = document.getElementById('header');
-        navigation.style.display = 'block';  // 显示导航菜单
-        header.style.display = 'block';  // 显示头部内容
+        navigation.style.display = 'block';
+        header.style.display = 'block';
+
+        // 显示第一个内容部分
+        showSection('intro');
     });
 
     function showSection(sectionId) {

@@ -5,32 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CARS-ANTI-CATS Project</title>
     <style>
-        /* 统一的像素风格字体 */
+        /* 页面背景 */
         body {
             font-family: 'Courier New', Courier, monospace;
-            background-color: #fff;
-            color: #333;
             margin: 0;
             padding: 0;
             text-align: center;
-            overflow-x: hidden;
             background-image: url('images/images/bG.jpg');
             background-size: cover;
             background-position: center;
+            overflow-x: hidden;
         }
 
-        /* 使前置动画视频淡入 */
-        .fade-in {
-            animation: fadeIn 2s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* 前置视频 */
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: 10;
         }
 
         /* 头部内容 */
@@ -42,19 +37,19 @@
             color: #fff;
             padding: 1rem 2rem;
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
 
         header h1 {
             margin: 0;
-            font-size: 3rem; /* 放大标题 */
+            font-size: 3rem;
             font-weight: bold;
             text-transform: uppercase;
         }
 
         header p {
             margin: 0;
-            font-size: 2rem; /* 放大描述文本 */
+            font-size: 2rem;
         }
 
         /* 导航菜单 */
@@ -76,7 +71,7 @@
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
-            font-size: 2rem; /* 放大字体 */
+            font-size: 2rem;
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
             transition: transform 0.3s ease-in-out;
@@ -86,7 +81,7 @@
             transform: scale(1.2);
         }
 
-        /* 内容部分 */
+        /* 页面内容部分 */
         .container {
             width: 80%;
             margin: auto;
@@ -119,15 +114,11 @@
             width: 100%;
         }
 
-        /* 前置视频 */
-        #intro-video {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-            z-index: 5;
+        /* 高亮文本 */
+        .highlight {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FF7043;
         }
     </style>
 </head>
@@ -140,7 +131,7 @@
 </video>
 
 <!-- 头部内容 -->
-<header id="header" class="fade-in" style="display: none;">
+<header id="header" style="display: none;">
     <div>
         <h1>CARS-ANTI-CATS Project</h1>
         <p>A community-driven solution to protect stray cats and ensure safety</p>
@@ -156,14 +147,14 @@
 </nav>
 
 <!-- 各部分内容 -->
-<div class="container fade-in" id="intro">
+<div class="container" id="intro">
     <section class="section">
         <h2>About the Project</h2>
         <p>The CARS-ANTI-CATS (CAC) system is an innovative solution designed to prevent stray cats from seeking warmth under car engines, reducing accidents and ensuring the safety of both cats and vehicles. The system uses infrared sensors to detect cats and emits harmless sound waves to deter them. This project combines technology and empathy to address a significant community concern.</p>
     </section>
 </div>
 
-<div class="container fade-in" id="how-it-works">
+<div class="container" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
         <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
@@ -171,17 +162,17 @@
     </section>
 </div>
 
-<div class="container fade-in" id="community">
+<div class="container" id="community">
     <section class="section">
         <h2>Community Engagement</h2>
         <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
         <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations.</p>
-        <p><strong>11 stray cats to 3, 0 cats in garage 2024 winter.</strong></p>
+        <p class="highlight">11 stray cats to 3, 0 cats in garage 2024 winter.</p>
         <p>I reached out to local residents who regularly feed stray cats and shared my project with them. After getting approval from property management, we placed cat shelters in designated areas. Over the past two years, the stray cat population, which previously included cats seeking warmth in the underground parking garage, has been significantly reduced. This winter, no strays have been found in the garage. Through TNR, we controlled the stray population, leaving only three cats still roaming, all of which are now housed in warm shelters. The rest have been adopted.</p>
     </section>
 </div>
 
-<div class="container fade-in" id="impact">
+<div class="container" id="impact">
     <section class="section">
         <h2>Impact and Vision</h2>
         <p>The CARS-ANTI-CATS project highlights the power of combining technology and compassion to solve real-world problems. It reflects the importance of shared concerns driving collective action and showcases how innovation can be used to create sustainable solutions.</p>

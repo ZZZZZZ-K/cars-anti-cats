@@ -44,6 +44,25 @@
             cursor: pointer;
         }
 
+        #preload .intro-text {
+            position: absolute;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            z-index: 110;
+            animation: fadeInText 5s ease-in-out forwards;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            25% { opacity: 1; }
+            50% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
         /* 动态加载效果 */
         .fade-in {
             animation: fadeIn 2s ease-in-out forwards;
@@ -164,6 +183,10 @@
 <!-- 前置动画区域 -->
 <div id="preload">
     <div class="text" onclick="startAnimation()">click to view CAC</div>
+    <div class="intro-text">
+        <p>this website will introduce you my work on CAC system.</p>
+        <p>If you want to know more, click on the webpage after the click sign appears.</p>
+    </div>
 </div>
 
 <header id="header" class="fade-in">
@@ -222,43 +245,27 @@
 </footer>
 
 <script>
-    // 前置动画功能
-    let preloadDiv = document.getElementById('preload');
-    let clickText = document.querySelector('.text');
-    let currentImageIndex = 1;
+    // 页面加载动画效果
+    let preload = document.getElementById('preload');
+    let introText = document.querySelector('.intro-text');
+    let navigation = document.getElementById('navigation');
+    let sections = document.querySelectorAll('.container');
 
     function startAnimation() {
-        clickText.style.display = 'none'; // 隐藏点击文字
-        showPathImages(); // 显示路径图片
+        preload.style.display = 'none';
+        navigation.style.display = 'block';
+        setTimeout(() => {
+            sections.forEach((section) => {
+                section.style.display = 'block';
+            });
+        }, 500);
     }
 
-    function showPathImages() {
-        let pathImagesInterval = setInterval(() => {
-            if (currentImageIndex <= 9) {
-                preloadDiv.style.backgroundImage = url('images/images/${currentImageIndex}.jpg');
-                currentImageIndex++;
-            } else {
-                clearInterval(pathImagesInterval); // 播放完所有图片后停止
-                preloadDiv.style.display = 'none'; // 隐藏前置动画
-                document.body.style.overflow = 'auto'; // 允许页面滚动
-                showContent(); // 显示页面内容
-            }
-        }, 500); // 每0.5秒切换一张图片
-    }
-
-    // 显示各部分内容
     function showSection(sectionId) {
-        document.querySelectorAll('.container').forEach(section => {
+        sections.forEach((section) => {
             section.style.display = 'none';
         });
         document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // 显示页面内容
-    function showContent() {
-        document.getElementById('header').classList.add('fade-in');
-        document.getElementById('navigation').style.display = 'block'; // 显示导航
-        showSection('intro'); // 默认显示关于内容
     }
 </script>
 

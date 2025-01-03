@@ -193,31 +193,13 @@
             width: 100%;
             z-index: 10;
         }
-
-        /* 视频部分 */
-        #video-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        #video-container video {
-            max-width: 90%;
-            max-height: 90%;
-        }
     </style>
 </head>
 <body>
 
 <!-- 前置动画区域 -->
 <div id="preload">
-    <div class="text" onclick="startAnimation()">click to view CAC</div>
+    <div class="text" onclick="startAnimation()">CLICK</div>
 </div>
 
 <header id="header" class="fade-in">
@@ -231,15 +213,8 @@
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
-        <p style="font-size: 1.6rem;">CAC（CARS-ANTI-CATS) is a community project that combines system design with animal protection. The purpose of the CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
-        <p style="font-size: 1.4rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
-    </section>
-</div>
-
-<div class="container fade-in" id="impact">
-    <section class="section">
-        <h2>Impact</h2>
-        <p>The impact of this project has been far-reaching. It not only protects the cats but also raises awareness about the unintended dangers vehicles can pose to wildlife. Since implementing the CAC system, incidents of cats entering vehicles have dramatically reduced, and many residents have reported greater peace of mind knowing that their cars are now safe from both animals and potential engine damage.</p>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
+        <p style="font-size: 1.2rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
     </section>
 </div>
 
@@ -248,15 +223,32 @@
     <a href="#about" onclick="showSection('intro')">About</a>
     <a href="#how-it-works" onclick="showSection('how-it-works')">How it works</a>
     <a href="#community" onclick="showSection('community')">Community</a>
+    <a href="#impact" onclick="showSection('impact')">Impact</a>
 </nav>
 
+<!-- 小箭头指示符 -->
 <div id="nav-indicator"></div>
 
-<!-- 视频播放容器 -->
-<div id="video-container" onclick="hideVideo()">
-    <video id="intro-video" controls autoplay>
-        <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
-    </video>
+<div class="container fade-in" id="how-it-works">
+    <section class="section">
+        <h2>How It Works</h2>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
+        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
+    </section>
+</div>
+
+<!-- COMMUNITY 部分 -->
+<div class="container fade-in" id="community">
+    <section class="section">
+        <h2><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</h2>
+    </section>
+    <section>
+        <h2>Community Engagement</h2>
+        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
+        <div class="text-box">
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were placed in approved locations. This initiative has brought together people who care about stray animals, and through volunteer work, has created a model for sustainable intervention...</p>
+        </div>
+    </section>
 </div>
 
 <footer>
@@ -264,30 +256,32 @@
 </footer>
 
 <script>
-    // 动画开始函数
+    // 前置动画播放视频
     function startAnimation() {
-        document.getElementById('preload').style.display = 'none';
-        document.getElementById('header').style.display = 'block';
-        document.getElementById('navigation').classList.add('show');
-        document.getElementById('nav-indicator').style.display = 'block';
+        document.getElementById('preload').style.display = 'none'; // 隐藏前置动画
+        var video = document.createElement('video');
+        video.src = 'images/images/326befec29d41368ab581e6ba2414e02.mp4';
+        video.controls = false;
+        video.autoplay = true;
+        video.style.position = 'fixed';
+        video.style.top = '0';
+        video.style.left = '0';
+        video.style.width = '100%';
+        video.style.height = '100%';
+        video.style.zIndex = '200';
+        document.body.appendChild(video);
+
+        video.onended = function() {
+            video.style.display = 'none'; // 视频播放完后隐藏
+        };
     }
 
-    // 显示不同部分的函数
+    // 显示指定内容区域
     function showSection(id) {
         document.querySelectorAll('.container').forEach(function(section) {
             section.style.display = 'none';
         });
         document.getElementById(id).style.display = 'block';
-    }
-
-    // 视频播放完后隐藏
-    function hideVideo() {
-        document.getElementById('video-container').style.display = 'none';
-    }
-
-    // 点击CLICK后显示视频
-    function playVideo() {
-        document.getElementById('video-container').style.display = 'flex';
     }
 </script>
 

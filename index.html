@@ -169,6 +169,12 @@
             color: #FF7043; /* 高亮数字颜色 */
         }
 
+        /* Impact部分 */
+        #impact p {
+            font-size: 1.8rem;
+            line-height: 1.8;
+        }
+
         /* 添加文本框样式 */
         .text-box {
             width: 100%;
@@ -193,18 +199,6 @@
             width: 100%;
             z-index: 10;
         }
-
-        /* 视频部分样式 */
-        .video-container {
-            position: relative;
-            width: 100%;
-            margin: 3rem 0;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-        }
     </style>
 </head>
 <body>
@@ -228,14 +222,6 @@
         <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle.</p>
         <p style="font-size: 1.4rem; line-height: 1.6;">In the winter of 2022, I noticed a concerning issue in my community: stray cats were frequently seeking warmth under cars and inside engine compartments. Many residents reported seeing cats running around the underground parking garage, and some even thought they had accidentally hit a cat. As a member of both the automotive club and the animal protection society at school, I was motivated to find a solution to this problem. I started this project with the goal of addressing the situation...</p>
     </section>
-
-    <!-- 添加视频 -->
-    <div class="video-container">
-        <video controls>
-            <source src="images/images/326befec29d41368ab581e6ba2414e02.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 </div>
 
 <!-- 导航菜单 -->
@@ -249,35 +235,66 @@
 <!-- 小箭头指示符 -->
 <div id="nav-indicator"></div>
 
+<!-- How It Works 部分 -->
+<div class="container fade-in" id="how-it-works">
+    <section class="section">
+        <h2>How It Works</h2>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
+        <p>Developed a system based on Raspberry Pi 4 that detects the presence of a cat near a vehicle using infrared (IR) sensors, and triggers an ultrasonic sound emitter to deter the cat. The system should increase the sound intensity if multiple sensors detect the cat simultaneously.</p>
+        <p>Raspberry Pi 4: The central control unit that processes inputs from the infrared sensors and controls the ultrasonic emitter.</p>
+        <p>Infrared Sensors (7 units): Positioned around the vehicle to detect motion. Each sensor outputs a HIGH signal when a cat is detected and LOW when not.</p>
+        <p>Ultrasonic Sound Emitter: Emits ultrasonic sound when activated. The intensity of the sound increases based on the number of sensors detecting the cat.</p>
+        <p>Battery supply: The system draws power from the vehicle’s 12V battery though a step-down module (DC-DC). The system is always active when the vehicle is parked and running.</p>
+    </section>
+</div>
+
 <!-- Impact 部分 -->
 <div class="container fade-in" id="impact">
     <section class="section">
         <h2>Impact</h2>
-        <p>The impact of this project has been significant, both for the community and the stray cats. By installing insulated shelters, we've provided these cats with a safe and warm place to stay during the cold winter months, reducing the risks of injury or harm from cars. The TNR program has been successful in managing the stray population, preventing uncontrolled growth, and improving the overall health and well-being of the cats.</p>
-        <p style="font-size: 1.4rem; line-height: 1.6;">Additionally, many of the cats involved in the program have found loving homes through adoption, giving them a chance for a better life. On a larger scale, this project has raised awareness about the issue of stray animals in urban areas and has encouraged more community involvement in animal welfare. The collaboration with local residents, property management, and animal advocates has fostered a sense of shared responsibility and compassion, making the community a safer place for both people and animals.</p>
+        <p>This project has not only raised awareness about the stray cat issue but has also contributed to preventing accidental harm to animals. Many vehicle owners and drivers have reported positive feedback after using the system in place, ensuring that the cats are kept safe and cars are maintained without unexpected interruptions.</p>
     </section>
 </div>
 
-<!-- Footer -->
+<!-- Community 部分 -->
+<div class="container fade-in" id="community">
+    <section class="section">
+        <h2>Community Impact</h2>
+        <p>Through the success of CAC system, we have involved the local community in a more direct way. It has helped spread awareness about responsible car ownership and animal welfare.</p>
+    </section>
+</div>
+
+<!-- 页脚 -->
 <footer>
-    <p>&copy; 2025 CARS-ANTI-CATS. All rights reserved.</p>
+    <p>&copy; 2024 Cars-anti-Cats Project</p>
 </footer>
 
+<!-- JS脚本 -->
 <script>
+    // 页面加载时移除前置动画
     function startAnimation() {
         document.getElementById('preload').style.display = 'none';
-        document.getElementById('header').style.display = 'block';
-        document.getElementById('intro').style.display = 'block';
-        document.getElementById('impact').style.display = 'block';
-        document.getElementById('navigation').classList.add('show');
-        document.getElementById('nav-indicator').style.display = 'block';
+        document.getElementById('header').classList.add('fade-in');
+        setTimeout(function () {
+            document.getElementById('navigation').classList.add('show');
+        }, 300);
+        setTimeout(function () {
+            document.getElementById('nav-indicator').style.display = 'block';
+        }, 600);
     }
 
+    // 显示相应的内容
     function showSection(id) {
-        const sections = ['intro', 'how-it-works', 'community', 'impact'];
-        sections.forEach(section => {
-            document.getElementById(section).style.display = (section === id) ? 'block' : 'none';
+        const sections = document.querySelectorAll('.container');
+        sections.forEach(function (section) {
+            section.style.display = 'none';
         });
+
+        document.getElementById(id).style.display = 'block';
+    }
+
+    window.onload = function () {
+        startAnimation();  // 初始化加载动画
     }
 </script>
 

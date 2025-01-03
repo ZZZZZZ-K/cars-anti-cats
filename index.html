@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -158,7 +158,7 @@
             margin: 0 auto;
         }
 
-        /* Community 部分 - 保留原有内容 */
+        /* Community 部分 - 新增 */
         #community h2 {
             font-size: 3rem;
         }
@@ -167,12 +167,6 @@
             font-size: 5rem;
             font-weight: bold;
             color: #FF7043; /* 高亮数字颜色 */
-        }
-
-        /* Impact部分 */
-        #impact p {
-            font-size: 1.8rem;
-            line-height: 1.8;
         }
 
         /* 添加文本框样式 */
@@ -235,68 +229,55 @@
 <!-- 小箭头指示符 -->
 <div id="nav-indicator"></div>
 
-<!-- How It Works 部分 -->
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
-        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
-        <p>Developed a system based on Raspberry Pi 4 that detects the presence of a cat near a vehicle using infrared (IR) sensors, and triggers an ultrasonic sound emitter to deter the cat. The system should increase the sound intensity if multiple sensors detect the cat simultaneously.</p>
-        <p>Raspberry Pi 4: The central control unit that processes inputs from the infrared sensors and controls the ultrasonic emitter.</p>
-        <p>Infrared Sensors (7 units): Positioned around the vehicle to detect motion. Each sensor outputs a HIGH signal when a cat is detected and LOW when not.</p>
-        <p>Ultrasonic Sound Emitter: Emits ultrasonic sound when activated. The intensity of the sound increases based on the number of sensors detecting the cat.</p>
-        <p>Battery supply: The system draws power from the vehicle’s 12V battery though a step-down module (DC-DC). The system is always active when the vehicle is parked and running.</p>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
+        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
     </section>
 </div>
 
-<!-- Impact 部分 -->
+<!-- COMMUNITY 部分 -->
+<div class="container fade-in" id="community">
+    <section class="section">
+        <h2><span class="highlight">11</span> stray cats to <span class="highlight">3</span>, <span class="highlight">0</span> cats in garage 2024 winter</h2>
+    </section>
+    <section>
+        <h2>Community Engagement</h2>
+        <img src="images/images/c1e3e584988ae4dcce25c85407e5df5.png" alt="Cat Shelter Photo">
+        <div class="text-box">
+            <p>Beyond the technical solution, this project involved active collaboration with the local community. Through presentations in residential groups and discussions with frequent feeders of stray cats, I garnered support and ideas. With permission from property management, insulated shelters were set up in designated spots. The goal was not just to protect the cats from harm but also to enhance community awareness.</p>
+        </div>
+    </section>
+</div>
+
+<!-- IMPACT 部分 -->
 <div class="container fade-in" id="impact">
     <section class="section">
         <h2>Impact</h2>
-        <p>This project has not only raised awareness about the stray cat issue but has also contributed to preventing accidental harm to animals. Many vehicle owners and drivers have reported positive feedback after using the system in place, ensuring that the cats are kept safe and cars are maintained without unexpected interruptions.</p>
-    </section>
-</div>
-
-<!-- Community 部分（保留原有内容） -->
-<div class="container fade-in" id="community">
-    <section class="section">
-        <h2>Community Impact</h2>
-        <p>Through the success of CAC system, we have involved the local community in a more direct way. It has helped spread awareness about responsible car ownership and animal welfare.</p>
-        <p>Some local organizations have even collaborated to promote the project, offering free installation for vehicles in need.</p>
-        <img src="images/images/community.jpg" alt="Community Engagement">
+        <p>The impact of this project has been profound. As of 2024 winter, the number of stray cats in our local parking garage has drastically decreased. Thanks to the collaboration of the community, the protection measures, and the overall engagement with the CAC project, stray cats are now safer and healthier.</p>
     </section>
 </div>
 
 <!-- 页脚 -->
 <footer>
-    <p>&copy; 2024 Cars-anti-Cats Project</p>
+    <p>&copy; 2024 Cars-anti-cats Project | Developed by ZZ(K)</p>
 </footer>
 
-<!-- JS脚本 -->
 <script>
-    // 页面加载时移除前置动画
     function startAnimation() {
         document.getElementById('preload').style.display = 'none';
-        document.getElementById('header').classList.add('fade-in');
-        setTimeout(function () {
-            document.getElementById('navigation').classList.add('show');
-        }, 300);
-        setTimeout(function () {
-            document.getElementById('nav-indicator').style.display = 'block';
-        }, 600);
+        document.body.style.overflow = 'auto';
+        setTimeout(function() {
+            document.getElementById('header').style.opacity = 1;
+        }, 1000);
     }
 
-    // 显示相应的内容
-    function showSection(id) {
-        const sections = document.querySelectorAll('.container');
-        sections.forEach(function (section) {
-            section.style.display = 'none';
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(function(container) {
+            container.style.display = 'none';
         });
-
-        document.getElementById(id).style.display = 'block';
-    }
-
-    window.onload = function () {
-        startAnimation();  // 初始化加载动画
+        document.getElementById(sectionId).style.display = 'block';
     }
 </script>
 

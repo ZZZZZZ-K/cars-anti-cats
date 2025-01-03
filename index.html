@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -218,7 +218,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN | GitHub: <a href="https://github.com/your-github-name" target="_blank">your-github-name</a></p>
+    <p>&copy; 2025 CARS-ANTI-CATS Project | Designed by LIU YIRAN</p>
 </footer>
 
 <script>
@@ -235,25 +235,30 @@
     function showPathImages() {
         let pathImagesInterval = setInterval(() => {
             if (currentImageIndex <= 9) {
-                preloadDiv.style.backgroundImage = `url('images/images/${currentImageIndex}.jpg')`;
+                preloadDiv.style.backgroundImage = url('images/images/${currentImageIndex}.jpg');
                 currentImageIndex++;
             } else {
-                clearInterval(pathImagesInterval);
-                setTimeout(() => {
-                    preloadDiv.style.display = 'none';
-                    document.getElementById('header').classList.add('fade-in');
-                    showSection('intro'); // 加载内容部分
-                    document.getElementById('navigation').style.display = 'block'; // 显示导航
-                }, 500);
+                clearInterval(pathImagesInterval); // 播放完所有图片后停止
+                preloadDiv.style.display = 'none'; // 隐藏前置动画
+                document.body.style.overflow = 'auto'; // 允许页面滚动
+                showContent(); // 显示页面内容
             }
-        }, 2000);
+        }, 500); // 每0.5秒切换一张图片
     }
 
-    // 显示不同部分内容
-    function showSection(id) {
-        let sections = document.querySelectorAll('.container');
-        sections.forEach(section => section.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
+    // 显示各部分内容
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(section => {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // 显示页面内容
+    function showContent() {
+        document.getElementById('header').classList.add('fade-in');
+        document.getElementById('navigation').style.display = 'block'; // 显示导航
+        showSection('intro'); // 默认显示关于内容
     }
 </script>
 

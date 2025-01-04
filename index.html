@@ -250,7 +250,6 @@
     </section>
 </div>
 
-
 <footer>
     <p>&copy; 2025 CARS-ANTI-CATS | All Rights Reserved</p>
 </footer>
@@ -265,46 +264,36 @@
 
     function typeText() {
         if (currentTextIndex < preloadText.length) {
-            let textDiv = document.getElementById('preload-text');
-            let currentText = preloadText[currentTextIndex];
-            let i = 0;
-            textDiv.innerHTML = '';
-            let typingInterval = setInterval(() => {
-                textDiv.innerHTML += currentText.charAt(i);
-                i++;
-                if (i > currentText.length) {
-                    clearInterval(typingInterval);
-                    currentTextIndex++;
-                    setTimeout(typeText, 2000); // 每2秒逐句显示
-                }
-            }, 100);
+            document.getElementById('preload-text').innerHTML = preloadText[currentTextIndex];
+            currentTextIndex++;
         } else {
-            // 最后显示"CLICK"按钮
-            setTimeout(() => {
-                let textDiv = document.getElementById('preload-text');
-                textDiv.innerHTML = 'CLICK';
-                textDiv.style.cursor = 'pointer';
-                textDiv.addEventListener('click', () => {
-                    document.getElementById('preload').style.display = 'none'; // 隐藏前置动画
-                    document.getElementById('header').style.display = 'block'; // 显示内容
-                    document.getElementById('navigation').classList.add('show'); // 显示导航
-                    document.getElementById('nav-indicator').style.display = 'block'; // 显示小箭头
-                    document.getElementById('intro').style.display = 'block'; // 显示内容
-                });
-            }, 1000);
+            document.getElementById('preload').style.display = 'none';
+            document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'block';
         }
     }
 
-    typeText(); // 启动逐句显示文字
+    setInterval(typeText, 3000);
 
-    // 显示指定部分
-    function showSection(id) {
-        let sections = document.querySelectorAll('.container');
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        document.getElementById(id).style.display = 'block';
-    }
+    // 页面加载时，导航栏显示判断
+    let scrollTimeout;
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY >= 150) {
+            document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'block';
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function () {
+                document.getElementById('navigation').classList.remove('show');
+                document.getElementById('nav-indicator').style.display = 'none';
+            }, 1500); // 在1.5秒内没有滑动则隐藏
+        }
+    });
+
+    // 页面加载时，强制显示导航栏（如果有需求）
+    document.getElementById('navigation').classList.add('show');
+    document.getElementById('nav-indicator').style.display = 'block';
 </script>
 
 </body>

@@ -232,7 +232,14 @@
     <section class="section">
         <h2>How It Works</h2>
         <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
-        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
+        <p>The system is based on Raspberry Pi 4, which detects the presence of a cat near a vehicle using infrared (IR) sensors and triggers an ultrasonic sound emitter to deter the cat. The system should increase the sound intensity if multiple sensors detect the cat simultaneously.</p>
+        <br>
+        <p>Component:</p>
+      <p>Component:</p>
+        <p>Raspberry Pi 4: The central control unit processes inputs from the infrared sensors and controls the ultrasonic emitter.</p>
+        <p>Infrared Sensors (7 units): Positioned around the vehicle to detect motion. Each sensor outputs a HIGH signal when a cat is detected and LOW when not. </p>
+        <p>Ultrasonic Sound Emitter: Emits ultrasonic sound when activated. The intensity of the sound increases based on the number of sensors detecting the cat. </p>
+        <p>Battery supply: The system draws power from the vehicle’s 12V battery through a step-down module (DC-DC converter) to convert the voltage to 5V backup supply lithium battery is required if the vehicle battery is not supplied.</p>
     </section>
 </div>
 

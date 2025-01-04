@@ -199,7 +199,7 @@
 
 <!-- 前置动画区域 -->
 <div id="preload">
-    <div class="text" id="preload-text">this website will introduce you my work on CAC system. If you want to know more, click on the webpage after the click sign appears.</div>
+    <div class="text" onclick="startAnimation()">click to view CAC</div>
 </div>
 
 <header id="header" class="fade-in">
@@ -213,7 +213,7 @@
 <div class="container fade-in" id="intro">
     <section class="section">
         <h2>About the Project</h2>
-        <p>CAC（CARS-ANTI-CATS) is a community project that combines system design with animal protection efforts. The purpose of CAC system is to prevent stray cats from entering vehicle parts for warmth, avoiding injury or death.</p>
+        <p>CAC（CARS-ANTI-CATS) is a community project that combined system design with animal protection means. The purpose of CAC system is to prevent stray cats from accidentally entering parts of a vehicle’s structure, particularly for warmth, which could result in injury or death. Additionally, it aims to avoid potential operational malfunctions caused by such incidents within the vehicle..</p>
     </section>
 </div>
 
@@ -231,8 +231,8 @@
 <div class="container fade-in" id="how-it-works">
     <section class="section">
         <h2>How It Works</h2>
-        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram">
-        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats.</p>
+        <img src="images/images/system.jpg" alt="CARS-ANTI-CATS System Diagram"> <!-- 更新为新图片 -->
+        <p>The system is powered by car batteries and features infrared sensors for precise detection. Ultrasonic emitters were calibrated after extensive testing to ensure the safety and comfort of the cats, balancing effectiveness and welfare.</p>
     </section>
 </div>
 
@@ -255,45 +255,60 @@
 </footer>
 
 <script>
-    // 引导页文字逐句显示函数
-    let preloadText = [
-        "this website will introduce you my work on CAC system.",
-        "If you want to know more, click on the webpage after the click sign appears."
-    ];
-    let currentTextIndex = 0;
-
-    function typeText() {
-        if (currentTextIndex < preloadText.length) {
-            document.getElementById('preload-text').innerHTML = preloadText[currentTextIndex];
-            currentTextIndex++;
-        } else {
-            document.getElementById('preload').style.display = 'none';
-            document.getElementById('navigation').classList.add('show');
-            document.getElementById('nav-indicator').style.display = 'block';
-        }
+    // 导航显示指示器
+    function showNavIndicator() {
+        setTimeout(function() {
+            document.getElementById("nav-indicator").style.display = 'block';
+        }, 2000); // 延迟显示指示器
     }
 
-    setInterval(typeText, 3000);
+    // 前置动画函数
+    function startAnimation() {
+        document.getElementById("preload").style.display = 'none';
+        document.getElementById("header").classList.add('fade-in');
+        document.getElementById("intro").style.display = 'block';
+        showNavIndicator(); // 显示导航栏指示器
+    }
 
-    // 页面加载时，导航栏显示判断
-    let scrollTimeout;
+    // 显示相应部分
+    function showSection(sectionId) {
+        document.querySelectorAll('.container').forEach(function(container) {
+            container.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
 
-    window.addEventListener('scroll', function () {
-        if (window.scrollY >= 150) {
+        // 显示导航栏
+        document.getElementById('navigation').classList.add('show');
+    }
+
+    // 页面滚动时触发，判断是否显示导航栏
+    window.onscroll = function() {
+        var scrollPosition = window.scrollY + window.innerHeight;
+        var documentHeight = document.documentElement.scrollHeight;
+
+        // 触发条件：滚动到距离底部200px时显示导航栏
+        if (documentHeight - scrollPosition < 200) {
             document.getElementById('navigation').classList.add('show');
+            document.getElementById('nav-indicator').style.display = 'none';
+        } else {
+            document.getElementById('navigation').classList.remove('show');
             document.getElementById('nav-indicator').style.display = 'block';
-
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(function () {
-                document.getElementById('navigation').classList.remove('show');
-                document.getElementById('nav-indicator').style.display = 'none';
-            }, 1500); // 在1.5秒内没有滑动则隐藏
         }
+    };
+
+    // 自动收回导航栏，若页面停滞一秒钟
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            document.getElementById('navigation').classList.remove('show');
+        }, 1500); // 滑动停止一秒后收回导航栏
     });
 
-    // 页面加载时，强制显示导航栏（如果有需求）
-    document.getElementById('navigation').classList.add('show');
-    document.getElementById('nav-indicator').style.display = 'block';
+    // 页面加载时触发
+    window.onload = function() {
+        startAnimation();
+    };
 </script>
 
 </body>
